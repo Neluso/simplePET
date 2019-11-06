@@ -132,9 +132,9 @@ def to_color(img):
 
 
 # pattern selection for simulation and reconstruction
-act = 1000  # material rad activity
+act = 10000  # material rad activity
 center_pattern = array([0,0,0,0,0,act,act,0,0,act,act,0,0,0,0,0])
-edges_pattern = array([act,0,0,acr,0,0,0,0,0,0,0,0,act,0,0,act])
+edges_pattern = array([act,0,0,act,0,0,0,0,0,0,0,0,act,0,0,act])
 cross_pattern = center_pattern + edges_pattern
 line_pattern = array([0,0,0,0,act,act,act,act,0,0,0,0,0,0,0,0])
 chess_pattern = array([act,0,act,0,0,act,0,act,act,0,act,0,0,act,0,act])
