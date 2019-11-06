@@ -24,73 +24,36 @@ def lc(vox, lor):
 def scanner_full(voxdata):
     # voxels: right -> left, top -> down
     vox = list()
-    for i in range(16):
+    for i in range(25):
         vox.append(events(voxdata[i]))
     vox = array(vox)
     # lors numered counterclockwise, starting from up-right
     lors = list()
     i = 0
-    while i < 4:
-        lors.append(lc(vox[i], 0) + lc(vox[i + 4], 0) + lc(vox[i + 8], 0) + lc(vox[i + 12], 0))
+    while i < 5:
+        lors.append(lc(vox[i], 0) + lc(vox[i + 5], 0) + lc(vox[i + 10], 0) + lc(vox[i + 15], 0) + lc(vox[i + 20], 0))
         i += 1
-    lors.append(lc(vox[1], 1) + lc(vox[4], 1))
-    lors.append(lc(vox[3], 1) + lc(vox[6], 1) + lc(vox[9], 1) + lc(vox[12], 1))
-    lors.append(lc(vox[11], 1) + lc(vox[14], 1))
-    i = 7
-    while i < 11:
-        lors.append(lc(vox[i], 2) + lc(vox[i + 1], 2) + lc(vox[i + 2], 2) + lc(vox[i + 3], 2))
+    lors.append(lc(vox[2], 1) + lc(vox[6], 1) + lc(vox[10], 1))
+    lors.append(lc(vox[3], 1) + lc(vox[7], 1) + lc(vox[11], 1) + lc(vox[15], 1))
+    lors.append(lc(vox[4], 1) + lc(vox[8], 1) + lc(vox[12], 1) + lc(vox[16], 1) + lc(vox[20], 1))
+    lors.append(lc(vox[9], 1) + lc(vox[13], 1) + lc(vox[17], 1) + lc(vox[21], 1))
+    lors.append(lc(vox[14], 1) + lc(vox[18], 1) + lc(vox[21], 1))
+    i = 10
+    while i < 15:
+        lors.append(lc(vox[i], 2) + lc(vox[i + 1], 2) + lc(vox[i + 2], 2) + lc(vox[i + 3], 2) + lc(vox[i + 4], 2))
         i +=1
-    lors.append(lc(vox[2], 3) + lc(vox[7], 3))
-    lors.append(lc(vox[0], 3) + lc(vox[5], 3) + lc(vox[10], 3) + lc(vox[15], 3))
-    lors.append(lc(vox[8], 3) + lc(vox[13], 3))
-    return array(lors)
-
-
-def scanner_opened(voxdata):
-    # voxels: right -> left, top -> down
-    vox = list()
-    for i in range(16):
-        vox.append(events(voxdata[i]))
-    vox = array(vox)
-    # lors numered counterclockwise, starting from up-right
-    lors = list()
-    i = 0
-    while i < 4:
-        lors.append(lc(vox[i], 0) + lc(vox[i + 4], 0) + lc(vox[i + 8], 0) + lc(vox[i + 12], 0))
-        i += 1
-    lors.append(lc(vox[1], 1) + lc(vox[4], 1))
-    lors.append(lc(vox[3], 1) + lc(vox[6], 1) + lc(vox[9], 1) + lc(vox[12], 1))
-    lors.append(lc(vox[11], 1) + lc(vox[14], 1))
-    i = 7
-    while i < 11:
-        lors.append(lc(vox[i], 2) + lc(vox[i + 1], 2) + lc(vox[i + 2], 2) + lc(vox[i + 3], 2))
-        i += 1
-    return array(lors)
-
-
-def scanner_cross(voxdata):
-    # voxels: right -> left, top -> down
-    vox = list()
-    for i in range(16):
-        vox.append(events(voxdata[i]))
-    vox = array(vox)
-    # lors numered counterclockwise, starting from up-right
-    lors = list()
-    i = 0
-    while i < 4:
-        lors.append(lc(vox[i], 0) + lc(vox[i + 4], 0) + lc(vox[i + 8], 0) + lc(vox[i + 12], 0))
-        i += 1
-    i = 7
-    while i < 11:
-        lors.append(lc(vox[i], 2) + lc(vox[i + 1], 2) + lc(vox[i + 2], 2) + lc(vox[i + 3], 2))
-        i += 1
+    lors.append(lc(vox[2], 3) + lc(vox[8], 3) + lc(vox[14], 3))
+    lors.append(lc(vox[1], 3) + lc(vox[7], 3) + lc(vox[13], 3) + lc(vox[18], 3))
+    lors.append(lc(vox[0], 3) + lc(vox[6], 3) + lc(vox[12], 3) + lc(vox[17], 3) + lc(vox[24], 3))
+    lors.append(lc(vox[5], 3) + lc(vox[11], 3) + lc(vox[16], 3) + lc(vox[23], 3))
+    lors.append(lc(vox[10], 3) + lc(vox[15], 3) + lc(vox[22], 3))
     return array(lors)
 
 
 def sim_object(pattern=random.poisson(50, size=25)):
     rn = pattern
     obj = list()
-    for i in range(16):
+    for i in range(25):
         obj.append(int(rn[i]))
     return array(obj)
 
@@ -116,10 +79,12 @@ def print_info(title, image, phant):
 
 
 def to_color(img):
-    pos = 0.95 * array([[2, 2], [1, 2], [-1, 2], [-2, 2],
-                 [2, 1], [1, 1], [-1, 1], [-2, 1],
-                 [2, -1], [1, -1], [-1, -1], [-2, -1],
-                 [2, -2], [1, -2], [-1, -2], [-2, -2]])
+    pos = 0.95 * array([[3,3], [2,3], [1,3], [-1,3], [-2,3],
+                        [3,2], [2,2], [1,2], [-1,2], [-2,2],
+                        [3,1], [2,1], [1,1], [-1,1], [-2,12],
+                        [3,-1], [2,-1], [1,-1], [-1,-1], [-2,-1],
+                        [3,-2], [2,-2], [1,-2], [-1,-2], [-2,-2]
+                        ])
     data = list()
     for i in range(img.shape[0]):
         nPos = int(img[i])
@@ -133,28 +98,42 @@ def to_color(img):
 
 # pattern selection for simulation and reconstruction
 act = 10000  # material rad activity
-center_pattern = array([0,0,0,0,0,0,0,0,0,0,0,0,act,0,0,0,0,0,0,0,0,0,0,0,0])
+center_pattern = array([act,act,act,act,act,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
 phantom = sim_object(pattern=center_pattern)
 
 
 data_full = scanner_full(phantom)
-data_full += sim_noise(1, data_full.shape[0])
+# data_full += sim_noise(1, data_full.shape[0])
 
 
-A_full = 1 / 4 * array([[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0],  # vertical lor detectors
+A_full = 1 / 5 * array([[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0],  # vertical lor detectors
                         [0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0],
                         [0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
                         [0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0],
                         [0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-                        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],  # 45 deg lor detectors
-                        [0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                        # [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],  # 45 deg lor detectors
+                        # [0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                         [0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+                        # [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0],
+                        # [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                        [1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],  # horizontal lor detectors
+                        [0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1],
+                        # [0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],  # 135 deg lor detectors
+                        # [0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                        [0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
+                        [0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0],
+                        [1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],
+                        [0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0],
+                        [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0],
+                        # [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0],
+                        # [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
                         ])
 Ainv_full = linalg.pinv(A_full)
 image_full = dot(Ainv_full, data_full)
@@ -166,9 +145,9 @@ print_info('Image Full PET', image_full, phantom)
 
 phantom_image = to_color(phantom)
 image_full_plot = to_color(image_full)
-plt.hist2d(phantom_image[:, 0], phantom_image[:, 1], bins=[[-2,-1,0,1,2,3],[-2,-1,0,1,2,3]])
+plt.hist2d(phantom_image[:, 0], phantom_image[:, 1], bins=[[-2,-1,1,2,3],[-2,-1,1,2,3]])
 plt.colorbar()
 plt.show()
-plt.hist2d(image_full_plot[:, 0], image_full_plot[:, 1], bins=[[-2,-1,0,1,2,3],[-2,-1,0,1,2,3]])
+plt.hist2d(image_full_plot[:, 0], image_full_plot[:, 1], bins=[[-2,-1,1,2,3],[-2,-1,1,2,3]])
 plt.colorbar()
 plt.show()
